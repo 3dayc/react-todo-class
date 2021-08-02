@@ -6,9 +6,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 const TodoListView = ({ todoList }) => (
   <div className="todo-list">
-    {todoList.map((value) => (
-      // <div>{value}</div>
-      <ListItem className="todo-list-row">
+    {todoList.map((value, index) => (
+      <ListItem key={index} className="todo-list-row">
         <Checkbox />
         <ListItemText>{value}</ListItemText>
         <DeleteIcon />

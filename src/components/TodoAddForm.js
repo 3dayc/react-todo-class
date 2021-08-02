@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import TodoListView from "./TodoListView";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import TodoListView from "./TodoListView";
 
 class TodoAddForm extends Component {
   state = {
@@ -15,23 +15,21 @@ class TodoAddForm extends Component {
   }
 
   inputTextBring = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      const {
-        target: { value },
-      } = e;
-      // this.setState({ todoList: e.target.value });
-      this.setState(
-        (state) => ({
-          todoList: [...state.todoList, value],
-        }),
-        () => {
-          localStorage.setItem("todoList", JSON.stringify(this.state.todoList));
-        }
-      );
-      console.log(e.target.value);
-      e.target.value = "";
-    }
+    e.preventDefault();
+    // console.log(e.target.todoText.value);
+    const {
+      todoText: { value },
+    } = e.target;
+    this.setState(
+      (state) => ({
+        todoList: [...state.todoList, value],
+      }),
+      () => {
+        localStorage.setItem("todoList", JSON.stringify(this.state.todoList));
+      }
+    );
+    // console.log(value);
+    e.target.todoText.value = "";
   };
 
   stateList = () => {
@@ -41,17 +39,13 @@ class TodoAddForm extends Component {
   render() {
     return (
       <div>
-        <form>
-          <TextField
-            name="todoText"
-            label="할 일"
-            onKeyPress={this.inputTextBring}
-          />
+        <form onSubmit={this.inputTextBring}>
+          <TextField name="todoText" label="할 일" />
           <Button
+            type="submit"
             variant="contained"
             color="primary"
             className="btnPos"
-            onClick={this.stateList}
           >
             Confirm
           </Button>
