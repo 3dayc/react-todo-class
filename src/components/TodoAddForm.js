@@ -16,24 +16,43 @@ class TodoAddForm extends Component {
 
   inputTextBring = (e) => {
     e.preventDefault();
-    // console.log(e.target.todoText.value);
     const {
       todoText: { value },
     } = e.target;
-    this.setState(
-      (state) => ({
-        todoList: [...state.todoList, value],
-      }),
-      () => {
-        localStorage.setItem("todoList", JSON.stringify(this.state.todoList));
-      }
-    );
-    // console.log(value);
-    e.target.todoText.value = "";
+    if (value !== "" && !value.match(/\s/g)) {
+      this.setState(
+        (state) => ({
+          todoList: [...state.todoList, value],
+        }),
+        () => {
+          localStorage.setItem("todoList", JSON.stringify(this.state.todoList));
+        }
+      );
+      e.target.todoText.value = "";
+    } else {
+      alert("할 일을 입렵하세요.");
+      e.target.todoText.value = "";
+      e.target.todoText.focus();
+    }
   };
 
   stateList = () => {
     console.log(this.state.todoList);
+  };
+
+  todoDeleteList = (index) => {
+    if (window.confirm("목록에서 지우시겠습니까?")) {
+      this.setState(
+        (state) => ({
+          todoList: [
+            ...state.todoList.slice(0, index),
+            ...state.todoList.slice(index + 1),
+          ],
+        }),
+        () =>
+          localStorage.setItem("todoList", JSON.stringify(this.state.todoList))
+      );
+    }
   };
 
   render() {
@@ -50,7 +69,10 @@ class TodoAddForm extends Component {
             Confirm
           </Button>
         </form>
-        <TodoListView todoList={this.state.todoList} />
+        <TodoListView
+          todoList={this.state.todoList}
+          todoDeleteList={this.todoDeleteList}
+        />
       </div>
     );
   }
