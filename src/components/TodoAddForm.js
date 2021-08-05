@@ -36,8 +36,8 @@ class TodoAddForm extends Component {
     }
   };
 
-  stateList = () => {
-    console.log(this.state.todoList);
+  todoModifyList = (index) => {
+    console.log(index);
   };
 
   todoDeleteList = (index) => {
@@ -59,7 +59,7 @@ class TodoAddForm extends Component {
     return (
       <div>
         <form onSubmit={this.inputTextBring}>
-          <TextField name="todoText" label="할 일" />
+          <TextField name="todoText" label="할 일" role="todoInput" />
           <Button
             type="submit"
             variant="contained"
@@ -72,6 +72,7 @@ class TodoAddForm extends Component {
         <TodoListView
           todoList={this.state.todoList}
           todoDeleteList={this.todoDeleteList}
+          todoModifyList={this.todoModifyList}
         />
       </div>
     );
