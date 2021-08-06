@@ -5,7 +5,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ThreeSixtyIcon from "@material-ui/icons/ThreeSixty";
 
-const TodoListView = ({ todoList, todoDeleteList, todoModifyList }) => (
+const TodoListView = ({ todoList, todoModifyList, todoDeleteList }) => (
   <div className="todo-list">
     {todoList.map((value, index) => (
       <ListItem key={index} index={index} className="todo-list-row">
