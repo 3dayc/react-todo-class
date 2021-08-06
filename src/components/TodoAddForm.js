@@ -19,7 +19,7 @@ class TodoAddForm extends Component {
     const {
       todoText: { value },
     } = e.target;
-    if (value !== "" && !value.match(/\s/g)) {
+    if (value !== "" && !value[0].match(/\s/g)) {
       this.setState(
         (state) => ({
           todoList: [...state.todoList, value],
@@ -30,7 +30,7 @@ class TodoAddForm extends Component {
       );
       e.target.todoText.value = "";
     } else {
-      alert("할 일을 입렵하세요.");
+      alert("할 일을 입렵하세요.\n(첫글자는 공백일 수 없음)");
       e.target.todoText.value = "";
       e.target.todoText.focus();
     }
