@@ -71,8 +71,8 @@ class TodoAddForm extends Component {
         </form>
         <TodoListView
           todoList={this.state.todoList}
-          todoDeleteList={this.todoDeleteList}
           todoModifyList={this.todoModifyList}
+          todoDeleteList={this.todoDeleteList}
         />
       </div>
     );
