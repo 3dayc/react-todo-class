@@ -15,4 +15,9 @@
   &-row.MuiListItem-root {
     text-align: center;
   }
+  &-row {
+    .done {
+      opacity: 0.3;
+    }
+  }
 }

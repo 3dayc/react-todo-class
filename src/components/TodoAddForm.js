@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 class TodoAddForm extends Component {
   state = {
     todoList: [],
+    todoDone: false,
   };
 
   componentDidMount() {
@@ -13,6 +14,8 @@ class TodoAddForm extends Component {
       todoList: JSON.parse(localStorage.getItem("todoList")) || [],
     });
   }
+
+  componentDidUpdate() {}
 
   inputTextBring = (e) => {
     e.preventDefault();
@@ -34,6 +37,13 @@ class TodoAddForm extends Component {
       e.target.todoText.value = "";
       e.target.todoText.focus();
     }
+  };
+
+  todoCheckControll = (index) => {
+    this.setState({
+      todoDone: !this.state.todoDone,
+    });
+    console.log(index);
   };
 
   todoModifyList = (index) => {
@@ -71,6 +81,8 @@ class TodoAddForm extends Component {
         </form>
         <TodoListView
           todoList={this.state.todoList}
+          todoCheckControll={this.todoCheckControll}
+          todoDone={this.state.todoDone}
           todoModifyList={this.todoModifyList}
           todoDeleteList={this.todoDeleteList}
         />
